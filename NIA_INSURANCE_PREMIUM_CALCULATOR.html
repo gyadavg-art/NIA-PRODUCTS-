@@ -9,42 +9,290 @@
      GLOBAL & LANDING STYLES
 ═══════════════════════════════════════════════════════ -->
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 .hidden { display: none !important; }
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f1f5f9; min-height: 100vh; }
+body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0f1e; min-height: 100vh; }
 
-/* Global Nav */
-#globalNav { background: #1e3a5f; color: white; padding: 12px 24px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 1000; }
-#globalNav button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 14px; font-family: inherit; }
-#globalNav button:hover { background: rgba(255,255,255,0.25); }
-#navTitle { font-size: 18px; font-weight: 600; }
+/* ── GLOBAL NAV (shown when inside a calculator) ── */
+#globalNav {
+  background: linear-gradient(135deg, #0f2240 0%, #1e3a5f 100%);
+  color: white; padding: 14px 28px;
+  display: flex; align-items: center; gap: 16px;
+  position: sticky; top: 0; z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+#globalNav button {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  color: white; padding: 8px 18px; border-radius: 8px; cursor: pointer;
+  font-size: 13px; font-family: inherit; font-weight: 600; letter-spacing: 0.3px;
+  transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+}
+#globalNav button:hover { background: rgba(255,255,255,0.2); transform: translateY(-1px); }
+#navTitle { font-size: 17px; font-weight: 700; color: #fff; }
+.nav-nia-logo {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px; color: #0a0f1e; flex-shrink: 0;
+}
 
-/* Landing screen */
-#landingScreen { max-width: 900px; margin: 0 auto; padding: 60px 24px; }
-.landing-header { text-align: center; margin-bottom: 48px; }
-.landing-header .logo { font-size: 40px; margin-bottom: 12px; }
-.landing-header h1 { font-size: 2rem; font-weight: 700; color: #1e3a5f; margin-bottom: 8px; }
-.landing-header p { color: #64748b; font-size: 1rem; }
-.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-@media (max-width: 600px) { .category-grid { grid-template-columns: 1fr; } }
-.category-card { background: white; border-radius: 16px; padding: 32px 28px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; border: 2px solid #e2e8f0; position: relative; overflow: hidden; }
-.category-card:hover:not(.disabled) { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); border-color: #2563a8; }
-.category-card.disabled { cursor: not-allowed; opacity: 0.7; }
-.category-card .card-icon { font-size: 48px; margin-bottom: 16px; }
-.category-card h2 { font-size: 1.3rem; font-weight: 700; color: #1e3a5f; margin-bottom: 4px; }
-.category-card .subtitle { font-size: 0.85rem; color: #64748b; margin-bottom: 12px; }
-.category-card .desc { font-size: 0.8rem; color: #94a3b8; }
-.coming-soon-badge { position: absolute; top: 16px; right: 16px; background: #f59e0b; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-.active-badge { position: absolute; top: 16px; right: 16px; background: #10b981; color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+/* ══════════════════════════════════════════════
+   LANDING PAGE
+══════════════════════════════════════════════ */
+#landingScreen {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(37,99,168,0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(139,92,246,0.2) 0%, transparent 60%),
+    linear-gradient(160deg, #050a14 0%, #0a0f1e 40%, #0d1a2e 100%);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
 
-/* Toast */
-#csToast { display: none; position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%); background: #1e293b; color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; z-index: 9999; white-space: nowrap; }
+/* Animated mesh grid background */
+#landingScreen::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(37,99,168,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,168,0.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+}
 
-/* Placeholder sections */
-#firePlaceholder, #otherPlaceholder { max-width: 600px; margin: 80px auto; text-align: center; background: white; border-radius: 16px; padding: 60px 40px; }
-#firePlaceholder .ph-icon, #otherPlaceholder .ph-icon { font-size: 64px; margin-bottom: 20px; }
-#firePlaceholder h2, #otherPlaceholder h2 { font-size: 1.8rem; color: #1e3a5f; margin-bottom: 12px; }
-#firePlaceholder p, #otherPlaceholder p { color: #64748b; }
+/* Floating orbs */
+.orb {
+  position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0;
+  animation: floatOrb 8s ease-in-out infinite;
+}
+.orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(37,99,168,0.35), transparent 70%); top: -150px; left: -100px; animation-delay: 0s; }
+.orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(139,92,246,0.2), transparent 70%); top: 200px; right: -100px; animation-delay: -3s; }
+.orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, rgba(16,185,129,0.15), transparent 70%); bottom: 50px; left: 30%; animation-delay: -5s; }
+@keyframes floatOrb { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-30px) scale(1.05)} }
+
+/* ── TOP NAV BAR (landing) ── */
+.landing-topbar {
+  position: relative; z-index: 10;
+  max-width: 1100px; margin: 0 auto;
+  padding: 24px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.landing-brand { display: flex; align-items: center; gap: 12px; }
+.brand-logo {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 18px; color: #0a0f1e;
+  box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+}
+.brand-name { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+.brand-sub  { font-size: 10px; color: rgba(255,255,255,0.45); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
+.topbar-pills { display: flex; gap: 8px; }
+.topbar-pill {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6); padding: 5px 14px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
+}
+@media(max-width:600px){ .topbar-pills { display: none; } }
+
+/* ── HERO ── */
+.landing-hero {
+  position: relative; z-index: 10;
+  max-width: 1100px; margin: 0 auto;
+  padding: 60px 32px 0;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(37,99,168,0.15); border: 1px solid rgba(37,99,168,0.35);
+  color: #93c5fd; padding: 6px 16px; border-radius: 30px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+  margin-bottom: 24px;
+}
+.hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #60a5fa; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+.hero-title {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 900; line-height: 1.1; color: #fff;
+  letter-spacing: -1.5px; margin-bottom: 20px;
+}
+.hero-title .accent {
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #34d399 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-desc {
+  font-size: 1.05rem; color: rgba(255,255,255,0.5); max-width: 520px;
+  margin: 0 auto 16px; line-height: 1.7; font-weight: 400;
+}
+.hero-hindi {
+  font-size: 0.9rem; color: rgba(255,255,255,0.3);
+  margin-bottom: 56px; font-weight: 500; letter-spacing: 0.3px;
+}
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 32px; margin-bottom: 56px;
+  position: relative; z-index: 10;
+}
+.stat-item { text-align: center; }
+.stat-num { font-size: 1.6rem; font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1; }
+.stat-num .stat-unit { font-size: 0.9rem; opacity: 0.6; font-weight: 600; }
+.stat-lbl { font-size: 0.7rem; color: rgba(255,255,255,0.35); font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 4px; }
+.stat-sep { width: 1px; height: 36px; background: rgba(255,255,255,0.1); }
+@media(max-width:480px){ .stats-row { gap: 20px; } .stat-sep { display: none; } }
+
+/* ── CATEGORY GRID ── */
+.category-section {
+  position: relative; z-index: 10;
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 32px 80px;
+}
+.section-label {
+  text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 28px;
+}
+.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+@media (max-width: 640px) { .category-grid { grid-template-columns: 1fr; gap: 14px; } }
+
+.category-card {
+  position: relative; overflow: hidden; cursor: pointer;
+  border-radius: 20px; padding: 32px 28px 28px;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.category-card::before {
+  content: ''; position: absolute; inset: 0; border-radius: 20px; opacity: 0;
+  transition: opacity 0.3s;
+  background: linear-gradient(135deg, var(--card-glow-a, rgba(37,99,168,0.15)), var(--card-glow-b, rgba(37,99,168,0.05)));
+}
+.category-card:hover:not(.disabled)::before { opacity: 1; }
+.category-card:hover:not(.disabled) {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08);
+}
+.category-card.disabled { cursor: not-allowed; opacity: 0.55; }
+.category-card.disabled:hover { transform: none; }
+
+/* Card colour themes */
+.card-motor  { --card-glow-a: rgba(37,99,168,0.2); --card-glow-b: rgba(37,99,168,0.05); }
+.card-health { --card-glow-a: rgba(16,185,129,0.2); --card-glow-b: rgba(16,185,129,0.05); }
+.card-fire   { --card-glow-a: rgba(239,68,68,0.15); --card-glow-b: rgba(239,68,68,0.04); }
+.card-other  { --card-glow-a: rgba(139,92,246,0.15); --card-glow-b: rgba(139,92,246,0.04); }
+
+/* Card corner glow blob */
+.card-blob {
+  position: absolute; top: -40px; right: -40px;
+  width: 160px; height: 160px; border-radius: 50%; filter: blur(40px);
+  opacity: 0.35; transition: opacity 0.3s; pointer-events: none;
+}
+.card-motor  .card-blob { background: #2563a8; }
+.card-health .card-blob { background: #10b981; }
+.card-fire   .card-blob { background: #ef4444; }
+.card-other  .card-blob { background: #8b5cf6; }
+.category-card:hover:not(.disabled) .card-blob { opacity: 0.6; }
+
+/* Card icon container */
+.card-icon-wrap {
+  width: 64px; height: 64px; border-radius: 18px; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; position: relative; z-index: 1;
+  transition: transform 0.3s;
+}
+.card-motor  .card-icon-wrap { background: linear-gradient(135deg, rgba(37,99,168,0.3), rgba(37,99,168,0.1)); border: 1px solid rgba(37,99,168,0.4); }
+.card-health .card-icon-wrap { background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(16,185,129,0.1)); border: 1px solid rgba(16,185,129,0.4); }
+.card-fire   .card-icon-wrap { background: linear-gradient(135deg, rgba(239,68,68,0.3), rgba(239,68,68,0.1));  border: 1px solid rgba(239,68,68,0.4); }
+.card-other  .card-icon-wrap { background: linear-gradient(135deg, rgba(139,92,246,0.3), rgba(139,92,246,0.1)); border: 1px solid rgba(139,92,246,0.4); }
+.category-card:hover:not(.disabled) .card-icon-wrap { transform: scale(1.1) rotate(-4deg); }
+
+.card-content { position: relative; z-index: 1; }
+.card-title-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px; }
+.card-title-row h2 { font-size: 1.2rem; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+.card-hindi { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-bottom: 10px; font-weight: 500; }
+.card-desc-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.card-pill {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.4px;
+  padding: 3px 10px; border-radius: 20px;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+}
+
+/* Arrow icon */
+.card-arrow {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4); font-size: 14px;
+  transition: all 0.3s; margin-top: 2px;
+}
+.category-card:hover:not(.disabled) .card-arrow {
+  background: rgba(255,255,255,0.15); color: #fff; transform: translateX(3px);
+}
+
+/* Badges */
+.coming-soon-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.35);
+  color: #fbbf24; font-size: 9px; font-weight: 800; padding: 3px 9px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+.active-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.35);
+  color: #34d399; font-size: 9px; font-weight: 800; padding: 3px 9px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px;
+  white-space: nowrap;
+}
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+
+/* ── FOOTER BAR ── */
+.landing-footer {
+  position: relative; z-index: 10;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 20px 32px;
+  text-align: center;
+  font-size: 11px; color: rgba(255,255,255,0.2); font-weight: 500; letter-spacing: 0.3px;
+}
+
+/* ── TOAST ── */
+#csToast {
+  display: none; position: fixed; bottom: 32px; left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(30,41,59,0.95); backdrop-filter: blur(12px);
+  color: white; padding: 14px 28px; border-radius: 12px;
+  font-size: 14px; z-index: 9999; white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  animation: toastIn 0.3s ease forwards;
+}
+@keyframes toastIn { to { transform: translateX(-50%) translateY(0); } }
+
+/* ── PLACEHOLDER SECTIONS ── */
+#firePlaceholder, #otherPlaceholder {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center;
+  background: linear-gradient(160deg, #050a14, #0a0f1e);
+  padding: 60px 40px;
+}
+#firePlaceholder .ph-icon, #otherPlaceholder .ph-icon { font-size: 72px; margin-bottom: 24px; filter: drop-shadow(0 0 30px rgba(245,158,11,0.3)); }
+#firePlaceholder h2, #otherPlaceholder h2 { font-size: 2rem; color: #fff; margin-bottom: 12px; font-weight: 800; }
+#firePlaceholder p, #otherPlaceholder p { color: rgba(255,255,255,0.4); font-size: 1rem; max-width: 360px; line-height: 1.7; }
+.ph-back-btn {
+  margin-top: 32px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: #fff; padding: 12px 28px; border-radius: 10px; cursor: pointer;
+  font-size: 14px; font-family: inherit; font-weight: 600; transition: all 0.2s;
+}
+.ph-back-btn:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
 
 @media print {
   #globalNav, #landingScreen, #firePlaceholder, #otherPlaceholder, #csToast { display: none !important; }
@@ -472,7 +720,8 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f1f5f9; min-
 
 <!-- Global Nav (hidden on landing) -->
 <div id="globalNav" style="display:none">
-  <button onclick="showLanding()">&#8592; Categories</button>
+  <div class="nav-nia-logo">N</div>
+  <button onclick="showLanding()">&#8592; All Products</button>
   <span id="navTitle"></span>
 </div>
 
@@ -483,41 +732,160 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f1f5f9; min-
      LANDING SCREEN
 ═══════════════════════════════════════════════════════ -->
 <div id="landingScreen">
-  <div class="landing-header">
-    <div class="logo">&#127963;&#65039;</div>
-    <h1>NIA Insurance Premium Calculator</h1>
-    <p>Select a product category to calculate premium</p>
-  </div>
-  <div class="category-grid">
-    <div class="category-card" onclick="showSection('motor')">
-      <span class="active-badge">Available</span>
-      <div class="card-icon">&#128665;</div>
-      <h2>Motor Insurance</h2>
-      <div class="subtitle">&#2350;&#2379;&#2335;&#2352; &#2348;&#2368;&#2350;&#2366;</div>
-      <div class="desc">Two Wheeler &middot; Private Car &middot; Commercial Vehicle</div>
+
+  <!-- Floating orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- Top bar -->
+  <div class="landing-topbar">
+    <div class="landing-brand">
+      <div class="brand-logo">N</div>
+      <div>
+        <div class="brand-name">New India Assurance</div>
+        <div class="brand-sub">Premium Calculator Suite</div>
+      </div>
     </div>
-    <div class="category-card" onclick="showSection('health')">
-      <span class="active-badge">Available</span>
-      <div class="card-icon">&#127973;</div>
-      <h2>Health Insurance</h2>
-      <div class="subtitle">&#2360;&#2381;&#2357;&#2366;&#2360;&#2381;&#2341;&#2381;&#2351; &#2348;&#2368;&#2350;&#2366;</div>
-      <div class="desc">Yuva Bharat &middot; NI Floater Mediclaim</div>
-    </div>
-    <div class="category-card disabled" onclick="showComingSoon('Fire')">
-      <span class="coming-soon-badge">Coming Soon</span>
-      <div class="card-icon">&#128293;</div>
-      <h2>Fire Insurance</h2>
-      <div class="subtitle">&#2309;&#2327;&#2381;&#2344;&#2367; &#2348;&#2368;&#2350;&#2366;</div>
-      <div class="desc">Property &middot; Commercial &middot; Industrial</div>
-    </div>
-    <div class="category-card disabled" onclick="showComingSoon('Other')">
-      <span class="coming-soon-badge">Coming Soon</span>
-      <div class="card-icon">&#128203;</div>
-      <h2>Other / Misc</h2>
-      <div class="subtitle">&#2309;&#2344;&#2381;&#2351; &#2348;&#2368;&#2350;&#2366;</div>
-      <div class="desc">Marine &middot; Burglary &middot; Engineering</div>
+    <div class="topbar-pills">
+      <span class="topbar-pill">&#9679; GST: NIL</span>
+      <span class="topbar-pill">&#9679; Tariff 2025</span>
     </div>
   </div>
+
+  <!-- Hero -->
+  <div class="landing-hero">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      Official NIA Agent Tool &nbsp;&middot;&nbsp; UP38 Sambhal
+    </div>
+    <h1 class="hero-title">
+      Calculate Insurance<br>
+      <span class="accent">Premium Instantly</span>
+    </h1>
+    <p class="hero-desc">
+      Accurate, tariff-based premium quotations for all major insurance products. Built for NIA agents.
+    </p>
+    <p class="hero-hindi">&#2348;&#2368;&#2350;&#2366; &#2346;&#2381;&#2352;&#2368;&#2350;&#2367;&#2351;&#2350; &#2340;&#2369;&#2352;&#2306;&#2340; &#2327;&#2339;&#2344;&#2366; &#2325;&#2352;&#2375;&#2306; &mdash; &#2350;&#2379;&#2335;&#2352;, &#2360;&#2381;&#2357;&#2366;&#2360;&#2381;&#2341;&#2381;&#2351;, &#2309;&#2327;&#2381;&#2344;&#2367; &#2319;&#2357;&#2306; &#2309;&#2344;&#2381;&#2351;</p>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">4<span class="stat-unit">+</span></div>
+        <div class="stat-lbl">Product Lines</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">100<span class="stat-unit">%</span></div>
+        <div class="stat-lbl">Tariff Accurate</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">0<span class="stat-unit"> GST</span></div>
+        <div class="stat-lbl">Health Plans</div>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-item">
+        <div class="stat-num">PDF</div>
+        <div class="stat-lbl">Quote Export</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Cards -->
+  <div class="category-section">
+    <p class="section-label">&#9135;&#9135; Select a product category to begin &#9135;&#9135;</p>
+    <div class="category-grid">
+
+      <!-- Motor -->
+      <div class="category-card card-motor" onclick="showSection('motor')">
+        <div class="card-blob"></div>
+        <div class="card-icon-wrap">&#128665;</div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <h2>Motor Insurance</h2>
+            <div>
+              <div class="active-badge"><span class="badge-dot"></span> Live</div>
+              <div class="card-arrow" style="margin-top:8px">&#8594;</div>
+            </div>
+          </div>
+          <div class="card-hindi">&#2350;&#2379;&#2335;&#2352; &#2348;&#2368;&#2350;&#2366;</div>
+          <div class="card-desc-pills">
+            <span class="card-pill">&#127949;&#65039; Two Wheeler</span>
+            <span class="card-pill">&#128665; Private Car</span>
+            <span class="card-pill">&#128665; Commercial Vehicle</span>
+            <span class="card-pill">NCB &amp; Add-ons</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Health -->
+      <div class="category-card card-health" onclick="showSection('health')">
+        <div class="card-blob"></div>
+        <div class="card-icon-wrap">&#127973;</div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <h2>Health Insurance</h2>
+            <div>
+              <div class="active-badge"><span class="badge-dot"></span> Live</div>
+              <div class="card-arrow" style="margin-top:8px">&#8594;</div>
+            </div>
+          </div>
+          <div class="card-hindi">&#2360;&#2381;&#2357;&#2366;&#2360;&#2381;&#2341;&#2381;&#2351; &#2348;&#2368;&#2350;&#2366;</div>
+          <div class="card-desc-pills">
+            <span class="card-pill">&#127808; Yuva Bharat</span>
+            <span class="card-pill">&#127973; NI Floater Mediclaim</span>
+            <span class="card-pill">PDF Quote</span>
+            <span class="card-pill">Commission</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fire -->
+      <div class="category-card card-fire disabled" onclick="showComingSoon('Fire')">
+        <div class="card-blob"></div>
+        <div class="card-icon-wrap">&#128293;</div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <h2>Fire Insurance</h2>
+            <div class="coming-soon-badge">&#9201; Coming Soon</div>
+          </div>
+          <div class="card-hindi">&#2309;&#2327;&#2381;&#2344;&#2367; &#2348;&#2368;&#2350;&#2366;</div>
+          <div class="card-desc-pills">
+            <span class="card-pill">&#127968; Property</span>
+            <span class="card-pill">&#127970; Commercial</span>
+            <span class="card-pill">&#127981; Industrial</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Other -->
+      <div class="category-card card-other disabled" onclick="showComingSoon('Other')">
+        <div class="card-blob"></div>
+        <div class="card-icon-wrap">&#128203;</div>
+        <div class="card-content">
+          <div class="card-title-row">
+            <h2>Other / Misc</h2>
+            <div class="coming-soon-badge">&#9201; Coming Soon</div>
+          </div>
+          <div class="card-hindi">&#2309;&#2344;&#2381;&#2351; &#2348;&#2368;&#2350;&#2366;</div>
+          <div class="card-desc-pills">
+            <span class="card-pill">&#9875; Marine</span>
+            <span class="card-pill">&#128274; Burglary</span>
+            <span class="card-pill">&#9881;&#65039; Engineering</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="landing-footer">
+    New India Assurance Co. Ltd. &nbsp;&middot;&nbsp; UP38 Sambhal &nbsp;&middot;&nbsp;
+    Tariff rates as per IRDAI 2025 &nbsp;&middot;&nbsp; For agent use only
+  </div>
+
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -1729,14 +2097,16 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f1f5f9; min-
 <div id="firePlaceholder" class="hidden">
   <div class="ph-icon">&#128293;</div>
   <h2>Fire Insurance</h2>
-  <p>This calculator is coming soon. Please check back later.</p>
+  <p>Tariff-based fire insurance calculator is being built. Check back soon.</p>
+  <button class="ph-back-btn" onclick="showLanding()">&#8592; Back to Products</button>
 </div>
 
 <!-- Other Placeholder -->
 <div id="otherPlaceholder" class="hidden">
   <div class="ph-icon">&#128203;</div>
   <h2>Other / Misc Insurance</h2>
-  <p>This calculator is coming soon. Please check back later.</p>
+  <p>Marine, Burglary and Engineering calculators are coming soon.</p>
+  <button class="ph-back-btn" onclick="showLanding()">&#8592; Back to Products</button>
 </div>
 
 <script>
