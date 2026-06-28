@@ -2109,7 +2109,7 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
       <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
       Calculate Premium
     </button>
-    <button class="btn-print" onclick="calculateTW()">
+    <button class="btn-print" onclick="motorOpenPrint()">
       🖨️ Print Quote
     </button>
   </div>
@@ -2370,7 +2370,7 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
       <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
       Calculate Premium
     </button>
-    <button class="btn-print" onclick="calculatePC()">🖨️ Print Quote</button>
+    <button class="btn-print" onclick="motorOpenPrint()">🖨️ Print Quote</button>
   </div>
 
   <!-- PC Quote Panel -->
@@ -2743,7 +2743,7 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
       <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 11h.01M12 11h.01M15 11h.01M4 19h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
       Calculate Premium
     </button>
-    <button class="btn-print" onclick="calculateCV()">🖨️ Print Quote</button>
+    <button class="btn-print" onclick="motorOpenPrint()">🖨️ Print Quote</button>
   </div>
 
   <!-- CV Quote Panel -->
@@ -5177,9 +5177,15 @@ function buildPrintDoc(d){
   '<div class="q-footer-bar">Computer-generated quotation &middot; The New India Assurance &mdash; Sambhal (UP 38) &middot; '+fmtD(today)+'</div>\n'+
   '</div><script>window.onload=()=>setTimeout(()=>window.print(),600);<\/script>\n</body></html>';
 
-  const w=window.open('','_blank','width=880,height=960');
-  if(!w){alert('Please allow popups to print the quotation.');return;}
-  w.document.write(html);
+  _motorPrintHTML = html;
+}
+
+let _motorPrintHTML = '';
+function motorOpenPrint() {
+  if (!_motorPrintHTML) { alert('Please calculate premium first.'); return; }
+  const w = window.open('','_blank','width=880,height=960');
+  if (!w) { alert('Please allow popups to print the quotation.'); return; }
+  w.document.write(_motorPrintHTML);
   w.document.close();
 }
 
