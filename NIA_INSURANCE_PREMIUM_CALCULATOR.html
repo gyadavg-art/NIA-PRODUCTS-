@@ -104,11 +104,11 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
 /* ── BADGE ── */
 .sambhal-badge {
   flex-shrink: 0;
-  width: 170px; height: 170px;
-  filter: drop-shadow(0 8px 32px rgba(201,162,39,0.35));
+  width: 190px; height: 190px;
+  filter: drop-shadow(0 8px 32px rgba(201,162,39,0.40));
   animation: fadeUp 0.7s ease both;
 }
-@media(max-width:640px){ .sambhal-badge { width: 120px; height: 120px; } }
+@media(max-width:640px){ .sambhal-badge { width: 130px; height: 130px; } }
 
 /* ── HERO TEXT ── */
 .hero-text-block {
@@ -1250,74 +1250,155 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
     <div class="hero-inner">
       <!-- Sambhal UP-38 Badge SVG -->
       <div class="sambhal-badge">
-        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" width="170" height="170">
-          <!-- Outer saffron ring -->
-          <circle cx="130" cy="130" r="126" fill="#f97316" />
-          <!-- White ring -->
-          <circle cx="130" cy="130" r="118" fill="#ffffff" />
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" width="190" height="190">
+          <defs>
+            <!-- Arc paths for text -->
+            <path id="sb-arc-top"    d="M 22,150 A 128,128 0 0,1 278,150" fill="none"/>
+            <path id="sb-arc-top2"   d="M 42,150 A 108,108 0 0,1 258,150" fill="none"/>
+            <path id="sb-arc-bot"    d="M 22,150 A 128,128 0 0,0 278,150" fill="none"/>
+            <path id="sb-arc-bot2"   d="M 50,150 A 100,100 0 0,0 250,150" fill="none"/>
+            <!-- Shield clip -->
+            <clipPath id="shieldClip">
+              <path d="M150,62 L195,78 L195,138 Q195,178 150,200 Q105,178 105,138 L105,78 Z"/>
+            </clipPath>
+          </defs>
+
+          <!-- === OUTER RING: orange === -->
+          <circle cx="150" cy="150" r="146" fill="#e8621a"/>
+          <!-- White spacer -->
+          <circle cx="150" cy="150" r="136" fill="#ffffff"/>
+          <!-- Gold ring -->
+          <circle cx="150" cy="150" r="133" fill="#c9a227"/>
           <!-- Navy body -->
-          <circle cx="130" cy="130" r="111" fill="#0d1b3e" />
-          <!-- Gold inner ring -->
-          <circle cx="130" cy="130" r="104" fill="none" stroke="#c9a227" stroke-width="3" />
-          <circle cx="130" cy="130" r="99" fill="none" stroke="#c9a227" stroke-width="1.2" />
+          <circle cx="150" cy="150" r="128" fill="#1a2b5e"/>
+          <!-- Inner gold ring -->
+          <circle cx="150" cy="150" r="122" fill="none" stroke="#c9a227" stroke-width="2"/>
+          <circle cx="150" cy="150" r="119" fill="none" stroke="#c9a227" stroke-width="0.8"/>
 
-          <!-- Arc text: SAMBHAL at top -->
-          <path id="arcTop" d="M 35,130 A 95,95 0 0,1 225,130" fill="none"/>
-          <text font-family="Georgia,serif" font-size="15" font-weight="bold" fill="#c9a227" letter-spacing="3">
-            <textPath href="#arcTop" startOffset="50%" text-anchor="middle">SAMBHAL</textPath>
+          <!-- === ARC TEXT: SAMBHAL (top, large) === -->
+          <text font-family="'Arial Black',Arial,sans-serif" font-size="22" font-weight="900" fill="#ffffff" letter-spacing="6">
+            <textPath href="#sb-arc-top" startOffset="50%" text-anchor="middle">SAMBHAL</textPath>
           </text>
 
-          <!-- Arc text: UTTAR PRADESH below top -->
-          <path id="arcTop2" d="M 45,130 A 85,85 0 0,1 215,130" fill="none"/>
-          <text font-family="Georgia,serif" font-size="10.5" fill="#e8c547" letter-spacing="1.5">
-            <textPath href="#arcTop2" startOffset="50%" text-anchor="middle">UTTAR PRADESH</textPath>
+          <!-- === ARC TEXT: UTTAR PRADESH (smaller, just below SAMBHAL) === -->
+          <text font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#e8c547" letter-spacing="2.5">
+            <textPath href="#sb-arc-top2" startOffset="50%" text-anchor="middle">UTTAR PRADESH</textPath>
           </text>
 
-          <!-- Arc text: NEW INDIA at bottom -->
-          <path id="arcBot" d="M 35,130 A 95,95 0 0,0 225,130" fill="none"/>
-          <text font-family="Georgia,serif" font-size="13" font-weight="bold" fill="#c9a227" letter-spacing="2.5">
-            <textPath href="#arcBot" startOffset="50%" text-anchor="middle">NEW INDIA</textPath>
+          <!-- === ARC TEXT: NEW INDIA (bottom, large) === -->
+          <text font-family="'Arial Black',Arial,sans-serif" font-size="20" font-weight="900" fill="#ffffff" letter-spacing="5">
+            <textPath href="#sb-arc-bot" startOffset="50%" text-anchor="middle">NEW INDIA</textPath>
           </text>
 
-          <!-- Arc text: PROGRESS · HERITAGE · DEVELOPMENT -->
-          <path id="arcBot2" d="M 50,130 A 80,80 0 0,0 210,130" fill="none"/>
-          <text font-family="Arial,sans-serif" font-size="8" fill="#e8c547" letter-spacing="0.8">
-            <textPath href="#arcBot2" startOffset="50%" text-anchor="middle">PROGRESS · HERITAGE · DEVELOPMENT</textPath>
+          <!-- === ARC TEXT: PROGRESS | HERITAGE | DEVELOPMENT === -->
+          <text font-family="Arial,sans-serif" font-size="8.5" font-weight="600" fill="#e8c547" letter-spacing="0.8">
+            <textPath href="#sb-arc-bot2" startOffset="50%" text-anchor="middle">PROGRESS | HERITAGE | DEVELOPMENT</textPath>
           </text>
 
-          <!-- India map silhouette (simplified) -->
-          <g transform="translate(105,68) scale(0.38)">
-            <path d="M60,0 C50,5 30,8 20,20 C10,32 5,45 8,60 C11,75 0,80 5,95 C10,110 25,115 30,130 C35,145 28,155 35,165 C42,175 55,175 65,182 C75,189 80,200 90,200 C100,200 105,188 115,183 C125,178 138,178 145,168 C152,158 148,145 150,132 C152,119 162,112 162,98 C162,84 152,78 148,65 C144,52 148,38 140,28 C132,18 118,18 108,10 C98,2 70,-5 60,0 Z" fill="#138808" opacity="0.85"/>
-            <!-- Kashmir -->
-            <path d="M90,0 C80,-5 68,2 60,0 C52,-2 45,8 48,18 C51,28 65,30 75,22 C85,14 92,5 90,0 Z" fill="#138808" opacity="0.85"/>
+          <!-- === LEFT LAUREL WREATH (green leaves) === -->
+          <g transform="translate(32,150)" opacity="0.92">
+            <!-- stem -->
+            <line x1="0" y1="30" x2="0" y2="-30" stroke="#3a7d1e" stroke-width="1.5"/>
+            <!-- leaves left side -->
+            <ellipse cx="-7" cy="22" rx="8" ry="4" fill="#4a9e28" transform="rotate(-40,-7,22)"/>
+            <ellipse cx="-8" cy="10" rx="8" ry="4" fill="#5cb832" transform="rotate(-50,-8,10)"/>
+            <ellipse cx="-7" cy="-2" rx="7" ry="3.5" fill="#4a9e28" transform="rotate(-55,-7,-2)"/>
+            <ellipse cx="-5" cy="-14" rx="6" ry="3" fill="#5cb832" transform="rotate(-60,-5,-14)"/>
+            <ellipse cx="-3" cy="-25" rx="5" ry="2.5" fill="#4a9e28" transform="rotate(-65,-3,-25)"/>
+            <!-- leaves right side -->
+            <ellipse cx="7" cy="22" rx="8" ry="4" fill="#5cb832" transform="rotate(40,7,22)"/>
+            <ellipse cx="8" cy="10" rx="8" ry="4" fill="#4a9e28" transform="rotate(50,8,10)"/>
+            <ellipse cx="7" cy="-2" rx="7" ry="3.5" fill="#5cb832" transform="rotate(55,7,-2)"/>
+            <ellipse cx="5" cy="-14" rx="6" ry="3" fill="#4a9e28" transform="rotate(60,5,-14)"/>
+            <ellipse cx="3" cy="-25" rx="5" ry="2.5" fill="#5cb832" transform="rotate(65,3,-25)"/>
           </g>
 
-          <!-- UP-38 text in center -->
-          <text x="130" y="172" text-anchor="middle" font-family="Georgia,serif" font-size="17" font-weight="bold" fill="#ffffff" letter-spacing="2">UP-38</text>
-
-          <!-- Tricolor stripe at bottom arc area -->
-          <path d="M 90,195 Q 130,208 170,195" stroke="#f97316" stroke-width="3" fill="none"/>
-          <path d="M 88,199 Q 130,213 172,199" stroke="#ffffff" stroke-width="3" fill="none"/>
-          <path d="M 89,203 Q 130,218 171,203" stroke="#138808" stroke-width="3" fill="none"/>
-
-          <!-- Left laurel -->
-          <g transform="translate(30,115) scale(0.9)" opacity="0.85">
-            <path d="M0,15 C-5,8 -5,0 0,-5" stroke="#c9a227" stroke-width="2" fill="none"/>
-            <path d="M0,15 C5,8 5,0 0,-5" stroke="#c9a227" stroke-width="1.5" fill="none"/>
-            <ellipse cx="-6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(-20,-6,5)"/>
-            <ellipse cx="6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(20,6,5)"/>
-            <ellipse cx="-4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(-40,-4,-2)"/>
-            <ellipse cx="4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(40,4,-2)"/>
+          <!-- === RIGHT LAUREL WREATH === -->
+          <g transform="translate(268,150)" opacity="0.92">
+            <line x1="0" y1="30" x2="0" y2="-30" stroke="#3a7d1e" stroke-width="1.5"/>
+            <ellipse cx="-7" cy="22" rx="8" ry="4" fill="#4a9e28" transform="rotate(-40,-7,22)"/>
+            <ellipse cx="-8" cy="10" rx="8" ry="4" fill="#5cb832" transform="rotate(-50,-8,10)"/>
+            <ellipse cx="-7" cy="-2" rx="7" ry="3.5" fill="#4a9e28" transform="rotate(-55,-7,-2)"/>
+            <ellipse cx="-5" cy="-14" rx="6" ry="3" fill="#5cb832" transform="rotate(-60,-5,-14)"/>
+            <ellipse cx="-3" cy="-25" rx="5" ry="2.5" fill="#4a9e28" transform="rotate(-65,-3,-25)"/>
+            <ellipse cx="7" cy="22" rx="8" ry="4" fill="#5cb832" transform="rotate(40,7,22)"/>
+            <ellipse cx="8" cy="10" rx="8" ry="4" fill="#4a9e28" transform="rotate(50,8,10)"/>
+            <ellipse cx="7" cy="-2" rx="7" ry="3.5" fill="#5cb832" transform="rotate(55,7,-2)"/>
+            <ellipse cx="5" cy="-14" rx="6" ry="3" fill="#4a9e28" transform="rotate(60,5,-14)"/>
+            <ellipse cx="3" cy="-25" rx="5" ry="2.5" fill="#5cb832" transform="rotate(65,3,-25)"/>
           </g>
 
-          <!-- Right laurel -->
-          <g transform="translate(230,115) scale(0.9)" opacity="0.85">
-            <path d="M0,15 C-5,8 -5,0 0,-5" stroke="#c9a227" stroke-width="2" fill="none"/>
-            <path d="M0,15 C5,8 5,0 0,-5" stroke="#c9a227" stroke-width="1.5" fill="none"/>
-            <ellipse cx="-6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(-20,-6,5)"/>
-            <ellipse cx="6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(20,6,5)"/>
-            <ellipse cx="-4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(-40,-4,-2)"/>
-            <ellipse cx="4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(40,4,-2)"/>
+          <!-- === SHIELD / CREST === -->
+          <!-- Shield border (gold) -->
+          <path d="M150,60 L198,78 L198,140 Q198,184 150,206 Q102,184 102,140 L102,78 Z"
+                fill="#c9a227" stroke="#c9a227" stroke-width="2"/>
+          <!-- Shield fill (dark navy) -->
+          <path d="M150,65 L194,82 L194,140 Q194,180 150,201 Q106,180 106,140 L106,82 Z"
+                fill="#12205a"/>
+
+          <!-- India map inside shield (outline style, gold/yellow) -->
+          <g transform="translate(150,132) scale(0.52)" clip-path="url(#shieldClip)">
+            <!-- India full outline -->
+            <path d="
+              M0,-105 C-5,-108 -18,-105 -25,-98 C-32,-91 -38,-80 -42,-68
+              C-46,-56 -50,-45 -48,-33 C-45,-20 -52,-15 -55,-5
+              C-58,5 -55,16 -52,25 C-48,34 -50,42 -45,50
+              C-40,58 -32,60 -28,68 C-22,78 -25,88 -18,95
+              C-11,102 -2,105 6,108 C14,111 20,118 28,120
+              C36,122 42,116 50,112 C58,108 66,106 72,100
+              C78,94 78,84 82,76 C86,68 92,62 92,52
+              C92,42 86,34 84,24 C82,14 86,4 82,-6
+              C78,-16 70,-20 65,-30 C60,-40 62,-52 55,-60
+              C48,-68 36,-70 28,-78 C20,-86 18,-98 8,-104
+              C0,-110 5,-102 0,-105 Z
+            " fill="#c9a227" stroke="#e8d060" stroke-width="1.5" opacity="0.95"/>
+            <!-- Kashmir bulge top -->
+            <path d="M0,-105 C-5,-112 -15,-115 -20,-108 C-25,-101 -20,-92 -12,-90 C-5,-88 2,-96 0,-105 Z"
+                  fill="#c9a227" stroke="#e8d060" stroke-width="1" opacity="0.95"/>
+            <!-- UP highlight (center-north) -->
+            <path d="M-8,-30 C-15,-35 -25,-32 -30,-25 C-35,-18 -32,-8 -26,-4 C-20,0 -10,-2 -4,-8 C2,-14 -2,-25 -8,-30 Z"
+                  fill="#f0c030" opacity="0.7"/>
+            <!-- Dot for Sambhal -->
+            <circle cx="-12" cy="-18" r="4" fill="#ffffff" opacity="0.9"/>
+          </g>
+
+          <!-- UP-38 label on shield -->
+          <rect x="114" y="178" width="72" height="22" rx="4" fill="#c9a227"/>
+          <text x="150" y="194" text-anchor="middle"
+                font-family="'Arial Black',Arial,sans-serif" font-size="13" font-weight="900"
+                fill="#12205a" letter-spacing="2">UP - 38</text>
+
+          <!-- Ashoka Chakra below shield -->
+          <circle cx="150" cy="215" r="10" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+          <circle cx="150" cy="215" r="2" fill="#1a3a8a"/>
+          <!-- 12 spokes -->
+          <g stroke="#1a3a8a" stroke-width="0.8">
+            <line x1="150" y1="205" x2="150" y2="207"/>
+            <line x1="150" y1="223" x2="150" y2="225"/>
+            <line x1="140" y1="215" x2="142" y2="215"/>
+            <line x1="158" y1="215" x2="160" y2="215"/>
+            <line x1="142.9" y1="207.9" x2="144.3" y2="209.3"/>
+            <line x1="155.7" y1="220.7" x2="157.1" y2="222.1"/>
+            <line x1="157.1" y1="207.9" x2="155.7" y2="209.3"/>
+            <line x1="144.3" y1="220.7" x2="142.9" y2="222.1"/>
+            <line x1="140" y1="210" x2="142" y2="211"/>
+            <line x1="158" y1="219" x2="160" y2="220"/>
+            <line x1="140" y1="220" x2="142" y2="219"/>
+            <line x1="158" y1="211" x2="160" y2="210"/>
+          </g>
+          <!-- Tricolor arc under chakra -->
+          <path d="M137,222 Q150,232 163,222" stroke="#f97316" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M137,227 Q150,237 163,227" stroke="#ffffff" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M138,231 Q150,241 162,231" stroke="#138808" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Small map silhouettes on left/right of shield (grey outline) -->
+          <g transform="translate(60,148) scale(0.18)" opacity="0.55">
+            <path d="M0,-105 C-5,-108 -18,-105 -25,-98 C-32,-91 -38,-80 -42,-68 C-46,-56 -50,-45 -48,-33 C-45,-20 -52,-15 -55,-5 C-58,5 -55,16 -52,25 C-48,34 -50,42 -45,50 C-40,58 -32,60 -28,68 C-22,78 -25,88 -18,95 C-11,102 -2,105 6,108 C14,111 20,118 28,120 C36,122 42,116 50,112 C58,108 66,106 72,100 C78,94 78,84 82,76 C86,68 92,62 92,52 C92,42 86,34 84,24 C82,14 86,4 82,-6 C78,-16 70,-20 65,-30 C60,-40 62,-52 55,-60 C48,-68 36,-70 28,-78 C20,-86 18,-98 8,-104 C0,-110 5,-102 0,-105 Z"
+                  fill="#aab8d0" stroke="#8898b0" stroke-width="4"/>
+          </g>
+          <g transform="translate(240,148) scale(0.18)" opacity="0.55">
+            <path d="M0,-105 C-5,-108 -18,-105 -25,-98 C-32,-91 -38,-80 -42,-68 C-46,-56 -50,-45 -48,-33 C-45,-20 -52,-15 -55,-5 C-58,5 -55,16 -52,25 C-48,34 -50,42 -45,50 C-40,58 -32,60 -28,68 C-22,78 -25,88 -18,95 C-11,102 -2,105 6,108 C14,111 20,118 28,120 C36,122 42,116 50,112 C58,108 66,106 72,100 C78,94 78,84 82,76 C86,68 92,62 92,52 C92,42 86,34 84,24 C82,14 86,4 82,-6 C78,-16 70,-20 65,-30 C60,-40 62,-52 55,-60 C48,-68 36,-70 28,-78 C20,-86 18,-98 8,-104 C0,-110 5,-102 0,-105 Z"
+                  fill="#aab8d0" stroke="#8898b0" stroke-width="4"/>
           </g>
         </svg>
       </div>
