@@ -40,231 +40,308 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
 }
 
 /* ══════════════════════════════════════════════
-   LANDING PAGE — Light & Bright Theme
+   LANDING PAGE — Sambhal UP-38 Theme
 ══════════════════════════════════════════════ */
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+@keyframes badgeSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+@keyframes shimmerGold { 0%{background-position:-200% center} 100%{background-position:200% center} }
+
+:root {
+  --navy:  #0d1b3e;
+  --navy2: #1a2f5e;
+  --gold:  #c9a227;
+  --gold2: #e8c547;
+  --saffron: #f97316;
+  --green-ind: #138808;
+  --white: #ffffff;
+}
+
+.orb { display: none; }
+
 #landingScreen {
   min-height: 100vh;
-  background: linear-gradient(160deg, #eef4ff 0%, #f0faf6 50%, #fef9ee 100%);
+  background: #f4f6fb;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  display: flex; flex-direction: column;
+}
+
+/* ── HERO HEADER (full bleed navy) ── */
+.landing-hero-header {
+  background: linear-gradient(135deg, #07112b 0%, #0d1b3e 45%, #162c5c 100%);
   padding: 0;
   position: relative;
   overflow: hidden;
 }
-
-/* Soft decorative blobs */
-#landingScreen::before {
-  content: '';
-  position: absolute; top: -120px; right: -120px;
-  width: 560px; height: 560px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(37,99,168,0.12), transparent 70%);
-  pointer-events: none; z-index: 0;
+.landing-hero-header::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,162,39,0.12), transparent 70%);
+  pointer-events: none;
 }
-#landingScreen::after {
-  content: '';
-  position: absolute; bottom: -80px; left: -80px;
-  width: 420px; height: 420px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(16,185,129,0.1), transparent 70%);
-  pointer-events: none; z-index: 0;
+.landing-hero-header::after {
+  content: ''; position: absolute; bottom: -40px; left: -40px;
+  width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(249,115,22,0.10), transparent 70%);
+  pointer-events: none;
 }
-.orb { display: none; } /* hide dark orbs */
 
-/* ── TOP NAV BAR (landing) ── */
-.landing-topbar {
-  position: relative; z-index: 10;
+/* gold top stripe */
+.hero-gold-stripe {
+  height: 4px;
+  background: linear-gradient(90deg, var(--saffron) 0%, var(--gold) 40%, var(--gold2) 60%, var(--saffron) 100%);
+  background-size: 200% 100%;
+  animation: shimmerGold 3s linear infinite;
+}
+
+.hero-inner {
   max-width: 1100px; margin: 0 auto;
-  padding: 22px 32px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid rgba(30,58,95,0.08);
+  padding: 36px 32px 40px;
+  display: flex; align-items: center; gap: 40px;
+  position: relative; z-index: 2;
 }
-.landing-brand { display: flex; align-items: center; gap: 12px; }
-.brand-logo {
-  width: 46px; height: 46px; border-radius: 13px;
-  background: linear-gradient(135deg, #1e3a5f 0%, #2563a8 100%);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 19px; color: #fff;
-  box-shadow: 0 4px 16px rgba(37,99,168,0.3);
-}
-.brand-name { font-size: 15px; font-weight: 800; color: #1e3a5f; letter-spacing: -0.3px; }
-.brand-sub  { font-size: 10px; color: #64748b; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; }
-.topbar-pills { display: flex; gap: 8px; }
-.topbar-pill {
-  background: #fff; border: 1px solid #e2e8f0;
-  color: #475569; padding: 5px 14px; border-radius: 20px;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.3px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-@media(max-width:600px){ .topbar-pills { display: none; } }
 
-/* ── HERO ── */
-.landing-hero {
-  position: relative; z-index: 10;
+/* ── BADGE ── */
+.sambhal-badge {
+  flex-shrink: 0;
+  width: 170px; height: 170px;
+  filter: drop-shadow(0 8px 32px rgba(201,162,39,0.35));
+  animation: fadeUp 0.7s ease both;
+}
+@media(max-width:640px){ .sambhal-badge { width: 120px; height: 120px; } }
+
+/* ── HERO TEXT ── */
+.hero-text-block {
+  flex: 1;
+  animation: fadeUp 0.7s ease 0.1s both;
+}
+.hero-org-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(201,162,39,0.15); border: 1px solid rgba(201,162,39,0.4);
+  color: var(--gold2); padding: 5px 14px; border-radius: 30px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero-org-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold2); animation: pulse 2s infinite; }
+.hero-main-title {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 900; line-height: 1.1; color: #fff;
+  letter-spacing: -0.5px; margin-bottom: 6px;
+}
+.hero-main-title .gold-accent { color: var(--gold2); }
+.hero-sub-title {
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  color: rgba(255,255,255,0.55); font-weight: 500;
+  margin-bottom: 20px; letter-spacing: 0.2px;
+}
+.hero-info-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-chip {
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.75); padding: 5px 12px; border-radius: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.2px;
+}
+.hero-chip-icon { font-size: 13px; }
+
+.hero-stats-strip {
+  display: flex; gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
   max-width: 1100px; margin: 0 auto;
-  padding: 56px 32px 0;
+  padding: 0 32px;
+  position: relative; z-index: 2;
+}
+.hstat {
+  flex: 1; padding: 16px 20px;
+  border-right: 1px solid rgba(255,255,255,0.08);
   text-align: center;
 }
-.hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: #eff6ff; border: 1px solid #bfdbfe;
-  color: #1d4ed8; padding: 6px 16px; border-radius: 30px;
-  font-size: 12px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
-  margin-bottom: 22px;
-}
-.hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: #3b82f6; animation: pulse 2s infinite; }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+.hstat:last-child { border-right: none; }
+.hstat-num { font-size: 1.4rem; font-weight: 900; color: var(--gold2); line-height: 1; letter-spacing: -0.5px; }
+.hstat-lbl { font-size: 9px; color: rgba(255,255,255,0.45); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
 
-.hero-title {
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  font-weight: 900; line-height: 1.1; color: #0f172a;
-  letter-spacing: -1.5px; margin-bottom: 18px;
-}
-.hero-title .accent {
-  background: linear-gradient(135deg, #1e3a5f 0%, #2563a8 50%, #0ea5e9 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.hero-desc {
-  font-size: 1.05rem; color: #64748b; max-width: 520px;
-  margin: 0 auto 14px; line-height: 1.75; font-weight: 400;
-}
-.hero-hindi {
-  font-size: 0.92rem; color: #94a3b8;
-  margin-bottom: 48px; font-weight: 500; letter-spacing: 0.3px;
+/* gold bottom stripe */
+.hero-gold-stripe-bottom {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--saffron) 70%, transparent);
 }
 
-/* ── STATS ROW ── */
-.stats-row {
-  display: flex; align-items: center; justify-content: center;
-  gap: 0; margin-bottom: 52px;
-  position: relative; z-index: 10;
-  background: #fff; border: 1px solid #e2e8f0;
-  border-radius: 16px; padding: 20px 32px;
-  max-width: 640px; margin-left: auto; margin-right: auto;
-  box-shadow: 0 4px 24px rgba(30,58,95,0.08);
-}
-.stat-item { text-align: center; flex: 1; }
-.stat-num { font-size: 1.55rem; font-weight: 900; color: #1e3a5f; letter-spacing: -1px; line-height: 1; }
-.stat-num .stat-unit { font-size: 0.85rem; opacity: 0.6; font-weight: 700; }
-.stat-lbl { font-size: 0.68rem; color: #94a3b8; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 5px; }
-.stat-sep { width: 1px; height: 36px; background: #e2e8f0; flex-shrink: 0; }
-@media(max-width:480px){ .stats-row { gap: 0; padding: 16px; } .stat-sep { display: none; } }
-
-/* ── CATEGORY GRID ── */
+/* ── CARDS SECTION ── */
 .category-section {
-  position: relative; z-index: 10;
-  max-width: 1100px; margin: 0 auto;
-  padding: 0 32px 72px;
+  flex: 1;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  padding: 36px 28px 48px;
+  animation: fadeUp 0.7s ease 0.2s both;
 }
 .section-label {
-  text-align: center; font-size: 11px; font-weight: 700; letter-spacing: 2px;
-  text-transform: uppercase; color: #94a3b8; margin-bottom: 24px;
+  text-align: center;
+  font-size: 10px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: #94a3b8; margin-bottom: 22px;
+  display: flex; align-items: center; gap: 14px;
 }
-.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-@media (max-width: 640px) { .category-grid { grid-template-columns: 1fr; gap: 14px; } }
+.section-label::before,.section-label::after {
+  content:''; flex:1; height:1px; background:#e2e8f0;
+}
+
+.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+@media (max-width: 640px) { .category-grid { grid-template-columns: 1fr; gap: 12px; } }
 
 .category-card {
   position: relative; overflow: hidden; cursor: pointer;
-  border-radius: 22px; padding: 32px 28px 26px;
-  border: 1.5px solid #e2e8f0;
+  border-radius: 20px; padding: 0;
+  border: 1.5px solid rgba(255,255,255,0.6);
   background: #ffffff;
   transition: all 0.28s cubic-bezier(0.4,0,0.2,1);
-  box-shadow: 0 2px 12px rgba(30,58,95,0.06);
+  box-shadow: 0 2px 14px rgba(13,27,62,0.07);
+  display: flex; flex-direction: column;
 }
-.category-card::before {
-  content: ''; position: absolute; inset: 0; border-radius: 22px; opacity: 0;
-  transition: opacity 0.28s;
-  background: var(--card-hover-bg, linear-gradient(135deg, #eff6ff, #f0fdf4));
-}
-.category-card:hover:not(.disabled)::before { opacity: 1; }
 .category-card:hover:not(.disabled) {
-  transform: translateY(-6px);
-  border-color: var(--card-accent, #2563a8);
-  box-shadow: 0 16px 48px rgba(30,58,95,0.14), 0 0 0 1px var(--card-accent, #2563a8);
+  transform: translateY(-5px);
+  border-color: var(--card-accent, #1e3a5f);
+  box-shadow: 0 20px 52px rgba(13,27,62,0.15), 0 0 0 1px var(--card-accent, #1e3a5f);
 }
-.category-card.disabled { cursor: not-allowed; opacity: 0.6; }
-.category-card.disabled:hover { transform: none; box-shadow: 0 2px 12px rgba(30,58,95,0.06); border-color: #e2e8f0; }
+.category-card.disabled { cursor: not-allowed; }
+.category-card.disabled:hover { transform: none; box-shadow: 0 2px 14px rgba(13,27,62,0.07); }
 
 /* Card colour themes */
-.card-motor  { --card-accent:#2563a8; --card-hover-bg: linear-gradient(135deg,#eff6ff,#e0f2fe); }
-.card-health { --card-accent:#059669; --card-hover-bg: linear-gradient(135deg,#f0fdf4,#ecfdf5); }
-.card-fire   { --card-accent:#dc2626; --card-hover-bg: linear-gradient(135deg,#fff1f2,#fef2f2); }
-.card-other  { --card-accent:#7c3aed; --card-hover-bg: linear-gradient(135deg,#faf5ff,#f3e8ff); }
+.card-motor  { --card-accent:#1a4eb5; }
+.card-health { --card-accent:#059669; }
+.card-fire   { --card-accent:#dc2626; }
+.card-other  { --card-accent:#7c3aed; }
 
-/* Card corner accent stripe */
-.card-blob {
-  position: absolute; top: 0; right: 0;
-  width: 120px; height: 120px;
-  background: radial-gradient(circle at top right, var(--card-blob-color, rgba(37,99,168,0.08)), transparent 70%);
-  pointer-events: none; border-radius: 0 22px 0 0;
+/* Top accent bar */
+.card-top-bar {
+  height: 5px;
+  background: var(--card-bar, linear-gradient(90deg, #1a4eb5, #3b82f6));
+  border-radius: 20px 20px 0 0;
 }
-.card-motor  .card-blob { --card-blob-color: rgba(37,99,168,0.10); }
-.card-health .card-blob { --card-blob-color: rgba(5,150,105,0.10); }
-.card-fire   .card-blob { --card-blob-color: rgba(220,38,38,0.08); }
-.card-other  .card-blob { --card-blob-color: rgba(124,58,237,0.08); }
+.card-motor  .card-top-bar { background: linear-gradient(90deg, #0d1b3e, #1a4eb5, #3b82f6); }
+.card-health .card-top-bar { background: linear-gradient(90deg, #065f46, #059669, #10b981); }
+.card-fire   .card-top-bar { background: linear-gradient(90deg, #7f1d1d, #dc2626, #f97316); }
+.card-other  .card-top-bar { background: linear-gradient(90deg, #4c1d95, #7c3aed, #a855f7); }
 
-/* Card icon container */
+.card-body-wrap { padding: 22px 24px 20px; flex: 1; }
+.card-blob { display: none; }
+
 .card-icon-wrap {
-  width: 64px; height: 64px; border-radius: 18px; margin-bottom: 18px;
+  width: 56px; height: 56px; border-radius: 14px; margin-bottom: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 30px; position: relative; z-index: 1;
-  transition: transform 0.28s;
+  font-size: 26px; transition: transform 0.28s;
 }
 .card-motor  .card-icon-wrap { background: linear-gradient(135deg,#dbeafe,#bfdbfe); border: 1.5px solid #93c5fd; }
 .card-health .card-icon-wrap { background: linear-gradient(135deg,#d1fae5,#a7f3d0); border: 1.5px solid #6ee7b7; }
 .card-fire   .card-icon-wrap { background: linear-gradient(135deg,#fee2e2,#fecaca); border: 1.5px solid #fca5a5; }
 .card-other  .card-icon-wrap { background: linear-gradient(135deg,#ede9fe,#ddd6fe); border: 1.5px solid #c4b5fd; }
-.category-card:hover:not(.disabled) .card-icon-wrap { transform: scale(1.1) rotate(-5deg); }
+.category-card:hover:not(.disabled) .card-icon-wrap { transform: scale(1.12) rotate(-6deg); }
 
 .card-content { position: relative; z-index: 1; }
-.card-title-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 5px; }
-.card-title-row h2 { font-size: 1.2rem; font-weight: 800; color: #0f172a; letter-spacing: -0.3px; }
-.card-hindi { font-size: 0.78rem; color: #94a3b8; margin-bottom: 10px; font-weight: 500; }
-.card-desc-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.card-title-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 3px; }
+.card-title-row h2 { font-size: 1.12rem; font-weight: 800; color: #0f172a; letter-spacing: -0.3px; }
+.card-hindi { font-size: 0.8rem; color: #94a3b8; margin-bottom: 8px; font-weight: 500; }
+.card-desc-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
 .card-pill {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
-  padding: 3px 10px; border-radius: 20px;
-  background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569;
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.2px;
+  padding: 3px 9px; border-radius: 20px;
+  background: #f8fafc; border: 1px solid #e2e8f0; color: #64748b;
 }
 .card-motor:hover  .card-pill { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
 .card-health:hover .card-pill { background: #d1fae5; border-color: #6ee7b7; color: #065f46; }
+.card-fire:hover   .card-pill { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
 
-/* Arrow icon */
+/* Card CTA bottom */
+.card-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 24px; margin-top: auto;
+  border-top: 1px solid #f1f5f9;
+  background: #fafbfc;
+  transition: all 0.24s;
+}
+.card-cta-text { font-size: 11.5px; font-weight: 700; color: #64748b; letter-spacing: 0.3px; }
 .card-arrow {
-  width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+  width: 30px; height: 30px; border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
   background: #f1f5f9; border: 1px solid #e2e8f0;
-  color: #94a3b8; font-size: 15px;
-  transition: all 0.28s; margin-top: 2px;
+  color: #94a3b8; font-size: 14px; transition: all 0.24s;
 }
-.category-card:hover:not(.disabled) .card-arrow {
-  background: var(--card-accent, #2563a8); border-color: var(--card-accent, #2563a8);
-  color: #fff; transform: translateX(4px);
-}
+.category-card:hover:not(.disabled) .card-cta { background: var(--card-accent); }
+.category-card:hover:not(.disabled) .card-cta-text { color: rgba(255,255,255,0.85); }
+.category-card:hover:not(.disabled) .card-arrow { background: rgba(255,255,255,0.2); border-color: transparent; color: #fff; transform: translateX(3px); }
 
 /* Badges */
 .coming-soon-badge {
   display: inline-flex; align-items: center; gap: 4px;
   background: #fef3c7; border: 1px solid #fde68a;
-  color: #92400e; font-size: 9px; font-weight: 800; padding: 4px 10px;
-  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px;
-  white-space: nowrap;
+  color: #92400e; font-size: 8px; font-weight: 800; padding: 3px 8px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap;
 }
 .active-badge {
   display: inline-flex; align-items: center; gap: 4px;
   background: #d1fae5; border: 1px solid #6ee7b7;
-  color: #065f46; font-size: 9px; font-weight: 800; padding: 4px 10px;
-  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px;
-  white-space: nowrap;
+  color: #065f46; font-size: 8px; font-weight: 800; padding: 3px 8px;
+  border-radius: 20px; text-transform: uppercase; letter-spacing: 0.8px; white-space: nowrap;
 }
-.badge-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
+.badge-dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; animation: pulse 2s infinite; }
 
 /* ── FOOTER BAR ── */
 .landing-footer {
-  position: relative; z-index: 10;
-  border-top: 1px solid #e2e8f0;
-  padding: 20px 32px;
+  background: var(--navy);
+  padding: 16px 32px;
   text-align: center;
-  font-size: 11px; color: #94a3b8; font-weight: 500; letter-spacing: 0.3px;
-  background: #fff;
+  font-size: 10.5px; color: rgba(255,255,255,0.38); font-weight: 500; letter-spacing: 0.5px;
 }
+.landing-footer strong { color: var(--gold); font-weight: 600; }
+
+/* topbar — hide, we use hero header instead */
+.landing-topbar, .landing-hero { display: none; }
+.stats-row, .hero-eyebrow, .hero-title, .hero-desc, .hero-hindi { display: none; }
+
+/* ── NEW HERO TEXT CLASSES ── */
+.hero-agency-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gold2); margin-bottom: 12px; opacity: 0.88;
+}
+.hero-heading {
+  font-size: clamp(1.7rem, 3.8vw, 2.7rem);
+  font-weight: 900; line-height: 1.1; color: #fff;
+  letter-spacing: -0.5px; margin: 0 0 8px;
+}
+.hero-heading-gold { color: var(--gold2); }
+.hero-sub {
+  font-size: clamp(0.82rem, 1.4vw, 1rem);
+  color: rgba(255,255,255,0.52); font-weight: 500;
+  margin-bottom: 10px; letter-spacing: 0.2px;
+}
+.hero-hindi-tag {
+  font-size: 0.82rem; color: rgba(255,255,255,0.38); font-weight: 400;
+}
+
+/* Stats strip items */
+.hstat-item {
+  flex: 1; padding: 14px 16px; text-align: center;
+}
+.hstat-sep {
+  width: 1px; background: rgba(255,255,255,0.08); align-self: stretch; margin: 8px 0;
+}
+.hstat-num { font-size: 1.3rem; font-weight: 900; color: var(--gold2); line-height: 1; letter-spacing: -0.5px; }
+.hstat-lbl { font-size: 9px; color: rgba(255,255,255,0.42); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+/* New card body classes */
+.card-icon-row {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+}
+.card-icon-big { font-size: 36px; }
+.card-title { font-size: 1.15rem; font-weight: 800; color: #0f172a; letter-spacing: -0.3px; margin: 0 0 3px; }
+.card-hindi-sm { font-size: 0.78rem; color: #94a3b8; margin: 0 0 8px; font-weight: 500; }
+.card-desc-text { font-size: 11px; color: #64748b; line-height: 1.5; margin: 0; }
+.card-cta-pills { display: flex; gap: 5px; }
+.card-pill-sm {
+  font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 12px;
+  background: #f1f5f9; border: 1px solid #e2e8f0; color: #64748b;
+}
+.card-cta-arrow {
+  font-size: 12px; font-weight: 700; color: #1d4ed8; transition: transform 0.2s;
+}
+.category-card:hover:not(.disabled) .card-cta-arrow { transform: translateX(4px); color: inherit; }
+.category-card:hover:not(.disabled) .card-cta { background: var(--card-bg-hover, #f0f6ff); }
 
 /* ── TOAST ── */
 #csToast {
@@ -1166,147 +1243,213 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
 ═══════════════════════════════════════════════════════ -->
 <div id="landingScreen">
 
-  <!-- Floating orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+  <!-- ── HERO HEADER ── -->
+  <div class="landing-hero-header">
+    <div class="hero-gold-stripe"></div>
 
-  <!-- Top bar -->
-  <div class="landing-topbar">
-    <div class="landing-brand">
-      <div class="brand-logo">N</div>
-      <div>
-        <div class="brand-name">New India Assurance</div>
-        <div class="brand-sub">Premium Calculator Suite</div>
+    <div class="hero-inner">
+      <!-- Sambhal UP-38 Badge SVG -->
+      <div class="sambhal-badge">
+        <svg viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg" width="170" height="170">
+          <!-- Outer saffron ring -->
+          <circle cx="130" cy="130" r="126" fill="#f97316" />
+          <!-- White ring -->
+          <circle cx="130" cy="130" r="118" fill="#ffffff" />
+          <!-- Navy body -->
+          <circle cx="130" cy="130" r="111" fill="#0d1b3e" />
+          <!-- Gold inner ring -->
+          <circle cx="130" cy="130" r="104" fill="none" stroke="#c9a227" stroke-width="3" />
+          <circle cx="130" cy="130" r="99" fill="none" stroke="#c9a227" stroke-width="1.2" />
+
+          <!-- Arc text: SAMBHAL at top -->
+          <path id="arcTop" d="M 35,130 A 95,95 0 0,1 225,130" fill="none"/>
+          <text font-family="Georgia,serif" font-size="15" font-weight="bold" fill="#c9a227" letter-spacing="3">
+            <textPath href="#arcTop" startOffset="50%" text-anchor="middle">SAMBHAL</textPath>
+          </text>
+
+          <!-- Arc text: UTTAR PRADESH below top -->
+          <path id="arcTop2" d="M 45,130 A 85,85 0 0,1 215,130" fill="none"/>
+          <text font-family="Georgia,serif" font-size="10.5" fill="#e8c547" letter-spacing="1.5">
+            <textPath href="#arcTop2" startOffset="50%" text-anchor="middle">UTTAR PRADESH</textPath>
+          </text>
+
+          <!-- Arc text: NEW INDIA at bottom -->
+          <path id="arcBot" d="M 35,130 A 95,95 0 0,0 225,130" fill="none"/>
+          <text font-family="Georgia,serif" font-size="13" font-weight="bold" fill="#c9a227" letter-spacing="2.5">
+            <textPath href="#arcBot" startOffset="50%" text-anchor="middle">NEW INDIA</textPath>
+          </text>
+
+          <!-- Arc text: PROGRESS · HERITAGE · DEVELOPMENT -->
+          <path id="arcBot2" d="M 50,130 A 80,80 0 0,0 210,130" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="8" fill="#e8c547" letter-spacing="0.8">
+            <textPath href="#arcBot2" startOffset="50%" text-anchor="middle">PROGRESS · HERITAGE · DEVELOPMENT</textPath>
+          </text>
+
+          <!-- India map silhouette (simplified) -->
+          <g transform="translate(105,68) scale(0.38)">
+            <path d="M60,0 C50,5 30,8 20,20 C10,32 5,45 8,60 C11,75 0,80 5,95 C10,110 25,115 30,130 C35,145 28,155 35,165 C42,175 55,175 65,182 C75,189 80,200 90,200 C100,200 105,188 115,183 C125,178 138,178 145,168 C152,158 148,145 150,132 C152,119 162,112 162,98 C162,84 152,78 148,65 C144,52 148,38 140,28 C132,18 118,18 108,10 C98,2 70,-5 60,0 Z" fill="#138808" opacity="0.85"/>
+            <!-- Kashmir -->
+            <path d="M90,0 C80,-5 68,2 60,0 C52,-2 45,8 48,18 C51,28 65,30 75,22 C85,14 92,5 90,0 Z" fill="#138808" opacity="0.85"/>
+          </g>
+
+          <!-- UP-38 text in center -->
+          <text x="130" y="172" text-anchor="middle" font-family="Georgia,serif" font-size="17" font-weight="bold" fill="#ffffff" letter-spacing="2">UP-38</text>
+
+          <!-- Tricolor stripe at bottom arc area -->
+          <path d="M 90,195 Q 130,208 170,195" stroke="#f97316" stroke-width="3" fill="none"/>
+          <path d="M 88,199 Q 130,213 172,199" stroke="#ffffff" stroke-width="3" fill="none"/>
+          <path d="M 89,203 Q 130,218 171,203" stroke="#138808" stroke-width="3" fill="none"/>
+
+          <!-- Left laurel -->
+          <g transform="translate(30,115) scale(0.9)" opacity="0.85">
+            <path d="M0,15 C-5,8 -5,0 0,-5" stroke="#c9a227" stroke-width="2" fill="none"/>
+            <path d="M0,15 C5,8 5,0 0,-5" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <ellipse cx="-6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(-20,-6,5)"/>
+            <ellipse cx="6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(20,6,5)"/>
+            <ellipse cx="-4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(-40,-4,-2)"/>
+            <ellipse cx="4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(40,4,-2)"/>
+          </g>
+
+          <!-- Right laurel -->
+          <g transform="translate(230,115) scale(0.9)" opacity="0.85">
+            <path d="M0,15 C-5,8 -5,0 0,-5" stroke="#c9a227" stroke-width="2" fill="none"/>
+            <path d="M0,15 C5,8 5,0 0,-5" stroke="#c9a227" stroke-width="1.5" fill="none"/>
+            <ellipse cx="-6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(-20,-6,5)"/>
+            <ellipse cx="6" cy="5" rx="5" ry="3" fill="#c9a227" transform="rotate(20,6,5)"/>
+            <ellipse cx="-4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(-40,-4,-2)"/>
+            <ellipse cx="4" cy="-2" rx="4" ry="2.5" fill="#c9a227" transform="rotate(40,4,-2)"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Hero text -->
+      <div class="hero-text-block">
+        <div class="hero-agency-tag">&#9679; New India Assurance &nbsp;·&nbsp; Sambhal Branch</div>
+        <h1 class="hero-heading">
+          Insurance Premium<br>
+          <span class="hero-heading-gold">Calculator Suite</span>
+        </h1>
+        <p class="hero-sub">IRDAI Tariff 2025 &nbsp;·&nbsp; Motor · Health · Fire &nbsp;·&nbsp; Built for NIA Agents</p>
+        <p class="hero-hindi-tag">बीमा प्रीमियम तुरंत गणना करें — मोटर, स्वास्थ्य, अग्नि एवं अन्य</p>
       </div>
     </div>
-    <div class="topbar-pills">
-      <span class="topbar-pill">&#9679; GST: NIL</span>
-      <span class="topbar-pill">&#9679; Tariff 2025</span>
+
+    <!-- Stats strip -->
+    <div class="hero-stats-strip">
+      <div class="hstat-item">
+        <div class="hstat-num">4+</div>
+        <div class="hstat-lbl">Product Lines</div>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat-item">
+        <div class="hstat-num">100%</div>
+        <div class="hstat-lbl">Tariff Accurate</div>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat-item">
+        <div class="hstat-num">NIL</div>
+        <div class="hstat-lbl">GST on Health</div>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat-item">
+        <div class="hstat-num">PDF</div>
+        <div class="hstat-lbl">Quote Export</div>
+      </div>
+      <div class="hstat-sep"></div>
+      <div class="hstat-item">
+        <div class="hstat-num">UP-38</div>
+        <div class="hstat-lbl">Sambhal Division</div>
+      </div>
     </div>
+    <div class="hero-gold-stripe hero-gold-stripe-bottom"></div>
   </div>
 
-  <!-- Hero -->
-  <div class="landing-hero">
-    <div class="hero-eyebrow">
-      <div class="hero-eyebrow-dot"></div>
-      Official NIA Agent Tool &nbsp;&middot;&nbsp; UP38 Sambhal
-    </div>
-    <h1 class="hero-title">
-      Calculate Insurance<br>
-      <span class="accent">Premium Instantly</span>
-    </h1>
-    <p class="hero-desc">
-      Accurate, tariff-based premium quotations for all major insurance products. Built for NIA agents.
-    </p>
-    <p class="hero-hindi">&#2348;&#2368;&#2350;&#2366; &#2346;&#2381;&#2352;&#2368;&#2350;&#2367;&#2351;&#2350; &#2340;&#2369;&#2352;&#2306;&#2340; &#2327;&#2339;&#2344;&#2366; &#2325;&#2352;&#2375;&#2306; &mdash; &#2350;&#2379;&#2335;&#2352;, &#2360;&#2381;&#2357;&#2366;&#2360;&#2381;&#2341;&#2381;&#2351;, &#2309;&#2327;&#2381;&#2344;&#2367; &#2319;&#2357;&#2306; &#2309;&#2344;&#2381;&#2351;</p>
-
-    <!-- Stats -->
-    <div class="stats-row">
-      <div class="stat-item">
-        <div class="stat-num">4<span class="stat-unit">+</span></div>
-        <div class="stat-lbl">Product Lines</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="stat-num">100<span class="stat-unit">%</span></div>
-        <div class="stat-lbl">Tariff Accurate</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="stat-num">0<span class="stat-unit"> GST</span></div>
-        <div class="stat-lbl">Health Plans</div>
-      </div>
-      <div class="stat-sep"></div>
-      <div class="stat-item">
-        <div class="stat-num">PDF</div>
-        <div class="stat-lbl">Quote Export</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Category Cards -->
+  <!-- ── CATEGORY CARDS ── -->
   <div class="category-section">
-    <p class="section-label">&#9135;&#9135; Select a product category to begin &#9135;&#9135;</p>
+    <p class="section-label">— Select a product category to begin —</p>
     <div class="category-grid">
 
       <!-- Motor -->
       <div class="category-card card-motor" onclick="showSection('motor')">
-        <div class="card-blob"></div>
-        <div class="card-icon-wrap">&#128665;</div>
-        <div class="card-content">
-          <div class="card-title-row">
-            <h2>Motor Insurance</h2>
-            <div>
-              <div class="active-badge"><span class="badge-dot"></span> Live</div>
-              <div class="card-arrow" style="margin-top:8px">&#8594;</div>
-            </div>
+        <div class="card-top-bar" style="background:linear-gradient(90deg,#1d4ed8,#3b82f6)"></div>
+        <div class="card-body-wrap">
+          <div class="card-icon-row">
+            <span class="card-icon-big">🚗</span>
+            <div class="active-badge"><span class="badge-dot"></span> Live</div>
           </div>
-          <div class="card-hindi">&#2350;&#2379;&#2335;&#2352; &#2348;&#2368;&#2350;&#2366;</div>
-          <div class="card-desc-pills">
-            <span class="card-pill">&#127949;&#65039; Two Wheeler</span>
-            <span class="card-pill">&#128665; Private Car</span>
-            <span class="card-pill">&#128665; Commercial Vehicle</span>
-            <span class="card-pill">NCB &amp; Add-ons</span>
-          </div>
+          <h2 class="card-title">Motor Insurance</h2>
+          <p class="card-hindi-sm">मोटर बीमा</p>
+          <p class="card-desc-text">Two Wheeler · Private Car · Commercial Vehicle · NCB &amp; Add-ons</p>
+        </div>
+        <div class="card-cta" style="--card-accent:#eff6ff">
+          <span class="card-cta-pills">
+            <span class="card-pill-sm">TW</span>
+            <span class="card-pill-sm">PC</span>
+            <span class="card-pill-sm">CV</span>
+          </span>
+          <span class="card-cta-arrow">Open →</span>
         </div>
       </div>
 
       <!-- Health -->
       <div class="category-card card-health" onclick="showSection('health')">
-        <div class="card-blob"></div>
-        <div class="card-icon-wrap">&#127973;</div>
-        <div class="card-content">
-          <div class="card-title-row">
-            <h2>Health Insurance</h2>
-            <div>
-              <div class="active-badge"><span class="badge-dot"></span> Live</div>
-              <div class="card-arrow" style="margin-top:8px">&#8594;</div>
-            </div>
+        <div class="card-top-bar" style="background:linear-gradient(90deg,#059669,#10b981)"></div>
+        <div class="card-body-wrap">
+          <div class="card-icon-row">
+            <span class="card-icon-big">🏥</span>
+            <div class="active-badge" style="--badge-col:#059669"><span class="badge-dot" style="background:#059669"></span> Live</div>
           </div>
-          <div class="card-hindi">&#2360;&#2381;&#2357;&#2366;&#2360;&#2381;&#2341;&#2381;&#2351; &#2348;&#2368;&#2350;&#2366;</div>
-          <div class="card-desc-pills">
-            <span class="card-pill">&#127808; Yuva Bharat</span>
-            <span class="card-pill">&#127973; NI Floater Mediclaim</span>
-            <span class="card-pill">PDF Quote</span>
-            <span class="card-pill">Commission</span>
-          </div>
+          <h2 class="card-title">Health Insurance</h2>
+          <p class="card-hindi-sm">स्वास्थ्य बीमा</p>
+          <p class="card-desc-text">Yuva Bharat · NI Floater Mediclaim · PDF Quote · Commission</p>
+        </div>
+        <div class="card-cta" style="--card-accent:#ecfdf5">
+          <span class="card-cta-pills">
+            <span class="card-pill-sm" style="background:#d1fae5;color:#065f46">Yuva</span>
+            <span class="card-pill-sm" style="background:#d1fae5;color:#065f46">Floater</span>
+          </span>
+          <span class="card-cta-arrow" style="color:#059669">Open →</span>
         </div>
       </div>
 
       <!-- Fire -->
       <div class="category-card card-fire" onclick="showSection('fire')">
-        <div class="card-blob"></div>
-        <div class="card-icon-wrap">&#128293;</div>
-        <div class="card-content">
-          <div class="card-title-row">
-            <h2>Fire Insurance</h2>
-            <div class="active-badge">&#9679; Active</div>
+        <div class="card-top-bar" style="background:linear-gradient(90deg,#dc2626,#f97316)"></div>
+        <div class="card-body-wrap">
+          <div class="card-icon-row">
+            <span class="card-icon-big">🔥</span>
+            <div class="active-badge" style="--badge-col:#dc2626"><span class="badge-dot" style="background:#dc2626"></span> Live</div>
           </div>
-          <div class="card-hindi">&#2309;&#2327;&#2381;&#2344;&#2367; &#2348;&#2368;&#2350;&#2366;</div>
-          <div class="card-desc-pills">
-            <span class="card-pill">&#127968; Property</span>
-            <span class="card-pill">&#127970; Commercial</span>
-            <span class="card-pill">&#127981; Industrial</span>
-          </div>
+          <h2 class="card-title">Fire Insurance</h2>
+          <p class="card-hindi-sm">अग्नि बीमा</p>
+          <p class="card-desc-text">Shop Keeper · Cold Storage · Stand Alone Godowns · Griha Raksha</p>
+        </div>
+        <div class="card-cta" style="--card-accent:#fff7ed">
+          <span class="card-cta-pills">
+            <span class="card-pill-sm" style="background:#fee2e2;color:#991b1b">Shop</span>
+            <span class="card-pill-sm" style="background:#fee2e2;color:#991b1b">Cold</span>
+          </span>
+          <span class="card-cta-arrow" style="color:#dc2626">Open →</span>
         </div>
       </div>
 
       <!-- Other -->
       <div class="category-card card-other disabled" onclick="showComingSoon('Other')">
-        <div class="card-blob"></div>
-        <div class="card-icon-wrap">&#128203;</div>
-        <div class="card-content">
-          <div class="card-title-row">
-            <h2>Other / Misc</h2>
-            <div class="coming-soon-badge">&#9201; Coming Soon</div>
+        <div class="card-top-bar" style="background:linear-gradient(90deg,#64748b,#94a3b8)"></div>
+        <div class="card-body-wrap">
+          <div class="card-icon-row">
+            <span class="card-icon-big" style="opacity:0.5">📋</span>
+            <div class="coming-soon-badge">⏱ Soon</div>
           </div>
-          <div class="card-hindi">&#2309;&#2344;&#2381;&#2351; &#2348;&#2368;&#2350;&#2366;</div>
-          <div class="card-desc-pills">
-            <span class="card-pill">&#9875; Marine</span>
-            <span class="card-pill">&#128274; Burglary</span>
-            <span class="card-pill">&#9881;&#65039; Engineering</span>
-          </div>
+          <h2 class="card-title" style="color:#94a3b8">Other / Misc</h2>
+          <p class="card-hindi-sm" style="color:#cbd5e1">अन्य बीमा</p>
+          <p class="card-desc-text" style="color:#cbd5e1">Marine · Burglary · Engineering · Misc</p>
+        </div>
+        <div class="card-cta" style="--card-accent:#f8fafc;border-top:1px solid #e2e8f0">
+          <span class="card-cta-pills">
+            <span class="card-pill-sm" style="background:#f1f5f9;color:#94a3b8">Soon</span>
+          </span>
+          <span class="card-cta-arrow" style="color:#94a3b8">⏱</span>
         </div>
       </div>
 
@@ -1315,8 +1458,8 @@ body { font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; background: #0a0
 
   <!-- Footer -->
   <div class="landing-footer">
-    New India Assurance Co. Ltd. &nbsp;&middot;&nbsp; UP38 Sambhal &nbsp;&middot;&nbsp;
-    Tariff rates as per IRDAI 2025 &nbsp;&middot;&nbsp; For agent use only
+    <strong>New India Assurance Co. Ltd.</strong> &nbsp;·&nbsp; UP-38 Sambhal Branch &nbsp;·&nbsp;
+    Tariff rates as per IRDAI 2025 &nbsp;·&nbsp; For authorised agent use only
   </div>
 
 </div>
